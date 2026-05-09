@@ -1,0 +1,16 @@
+{
+  "name": "VIP Earner GH",
+  "short_name": "VIPEarner",
+  "description": "Earn GHS by completing engagement tasks",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#1D4ED8",
+  "background_color": "#EFF6FF",
+  "start_url": "/?pwa=1",
+  "scope": "/",
+  "lang": "en-GH",
+  "icons": [
+    {"src":"/icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"/icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

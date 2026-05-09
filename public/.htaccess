@@ -5,21 +5,49 @@
 
     RewriteEngine On
 
-    # Handle Authorization Header
+    # ── Security: Force HTTPS ──────────────────────────────────────────────────
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # ── Security: Block access to hidden files ─────────────────────────────────
+    RewriteCond %{REQUEST_URI} ^/\.
+    RewriteRule . - [F,L]
+
+    # ── Pass Authorization & XSRF headers through Apache ──────────────────────
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Handle X-XSRF-Token Header
     RewriteCond %{HTTP:x-xsrf-token} .
     RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
 
-    # Redirect Trailing Slashes If Not A Folder...
+    # ── Remove trailing slashes ────────────────────────────────────────────────
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Send Requests To Front Controller...
+    # ── Front controller ──────────────────────────────────────────────────────
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# ── Security: Remove server fingerprint headers ────────────────────────────────
+<IfModule mod_headers.c>
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+    Header unset Server
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ── Disable server signature ──────────────────────────────────────────────────
+ServerSignature Off
+
+# ── Protect sensitive files ───────────────────────────────────────────────────
+<FilesMatch "^\.env|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

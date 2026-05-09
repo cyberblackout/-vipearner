@@ -123,4 +123,13 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'min_deposit_ghs' => env('MIN_DEPOSIT_GHS', 1),
+    'min_withdrawal_ghs' => env('MIN_WITHDRAWAL_GHS', 5),
+    'referral_bonus_ghs' => env('REFERRAL_BONUS_GHS', 2),
+    'referral_trigger_deposit' => env('REFERRAL_TRIGGER_DEPOSIT', 10),
+    'lucky_bag_min' => env('LUCKY_BAG_MIN', 0.10),
+    'lucky_bag_max' => env('LUCKY_BAG_MAX', 1.00),
+    'termii_api_key' => env('TERMII_API_KEY'),
+    'termii_sender_id' => env('TERMII_SENDER_ID', 'VIPEarner'),
+
 ];
