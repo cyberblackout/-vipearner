@@ -13,7 +13,6 @@ import { supabase } from '../../lib/supabase';
 import { formatGHS } from '../../lib/formatters';
 import BottomNav from '../../components/BottomNav';
 import { VipEarnerLogo } from '../../components/common/VipEarnerLogo';
-import { HeroBannerIllustration } from '../../components/common/HeroBannerIllustration';
 import { QuickActionIcon } from '../../components/common/QuickActionIcon';
 import { RecentWithdrawalsSection } from '../../components/common/RecentWithdrawalsSection';
 import { TrustFooter } from '../../components/common/TrustFooter';
@@ -22,43 +21,40 @@ import { InvestmentProductCard } from '../../components/common/InvestmentProduct
 import { VipIncomeTable } from '../../components/common/VipIncomeTable';
 import { PRODUCTS_CATALOG, CryptoStakingProduct, COIN_CHIPS as COIN_TABS } from '../../data/cryptoProducts';
 
-/* ── 1. CAROUSEL BANNERS (EXACT REFERENCE CONTENT FROM 66EX.VIP) ───────────── */
+/* ── 1. CAROUSEL BANNERS (FEATURING USER CRYPTO ASSETS) ───────────── */
 const BANNERS = [
   {
     id: 1,
     type: 'newUser' as const,
-    bg: '#F8FAFC',
-    textColor: '#1E293B',
-    accentTag: '#FF5722',
+    image: '/images/banners/banner1.jpg',
+    accentTag: '#38BDF8',
     mainTitle: 'Exclusive for',
-    mainTitleSub: 'new users',
-    rateBadge: '365% Rate of return',
-    durationBadge: '2 Day/Duration',
-    extraNotes: '',
+    mainTitleSub: 'New Users',
+    rateBadge: '365% Rate of Return',
+    durationBadge: '2 Day Trial Experience Principal',
+    link: '/vip',
   },
   {
     id: 2,
     type: 'invite' as const,
-    bg: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 50%, #38BDF8 100%)',
-    textColor: '#FFFFFF',
+    image: '/images/banners/banner2.jpg',
     accentTag: '#FBBF24',
-    mainTitle: 'Invite friends',
-    mainTitleSub: '45% commission bonus',
-    rateBadge: '1. A can get 30% of B\'s investment income as a commission reward',
-    durationBadge: '2. A can get 15% of C\'s investment income as a commission reward',
-    extraNotes: '',
+    mainTitle: 'Invite Friends',
+    mainTitleSub: '45% Commission',
+    rateBadge: 'Level 1: 30% • Level 2: 15% Bonus',
+    durationBadge: 'Instant MoMo & Crypto Commission Payouts',
+    link: '/referral',
   },
   {
     id: 3,
     type: 'welfare' as const,
-    bg: 'linear-gradient(135deg, #180B33 0%, #3B1B7D 60%, #6D28D9 100%)',
-    textColor: '#FFFFFF',
-    accentTag: '#F43F5E',
-    mainTitle: 'Welfare',
-    mainTitleSub: 'Blind Box',
-    rateBadge: 'Highest rate of return +30%',
-    durationBadge: 'Win up to 5,000 USDT in instant cash rewards',
-    extraNotes: '',
+    image: '/images/banners/banner3.png',
+    accentTag: '#34D399',
+    mainTitle: 'Crypto Staking',
+    mainTitleSub: 'Quantitative Yields',
+    rateBadge: 'Highest Rate of Return +30%',
+    durationBadge: '100% Principal Returned on Maturity',
+    link: '/welfare',
   },
 ];
 
@@ -246,167 +242,134 @@ export default function HomePage() {
         </div>
 
         {/* ══════════════════════════════════════════════════════
-            3. HERO BANNER CAROUSEL (Exact 66ex.vip Design)
+            3. HERO BANNER CAROUSEL (FEATURING CRYPTO ASSETS)
         ══════════════════════════════════════════════════════ */}
         <div style={{ padding: '12px 14px 6px' }}>
           <div
+            onClick={() => history.push(BANNERS[bannerIdx].link)}
             style={{
-              background: BANNERS[bannerIdx].bg,
-              borderRadius: 16,
-              padding: '16px 18px 14px',
-              color: BANNERS[bannerIdx].textColor,
               position: 'relative',
+              borderRadius: 18,
               overflow: 'hidden',
-              minHeight: 140,
-              boxShadow: '0 6px 18px -4px rgba(0,0,0,0.08)',
-              border: BANNERS[bannerIdx].type === 'newUser' ? '1px solid #E2E8F0' : 'none',
+              minHeight: 154,
+              background: '#0B111E',
+              boxShadow: '0 8px 24px -4px rgba(0,0,0,0.3)',
+              cursor: 'pointer',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
               transition: 'all 0.4s ease',
             }}
           >
-            {/* Right-aligned custom SVG illustration matching reference frame */}
+            {/* Real Photographic Background Image */}
+            <img
+              src={BANNERS[bannerIdx].image}
+              alt="Crypto banner visual"
+              style={{
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                width: '62%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                filter: 'brightness(0.96) contrast(1.05)',
+                maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 25%, black 65%)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 25%, black 65%)',
+              }}
+            />
+
+            {/* High-contrast gradient scrim for crystal clear readability */}
             <div
               style={{
                 position: 'absolute',
-                right: -4,
-                top: '50%',
-                transform: 'translateY(-50%)',
+                inset: 0,
+                background: 'linear-gradient(90deg, #0B111E 0%, rgba(11, 17, 30, 0.96) 42%, rgba(11, 17, 30, 0.6) 72%, transparent 100%)',
                 pointerEvents: 'none',
               }}
+            />
+
+            {/* Banner Left Content Area */}
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 2,
+                padding: '18px 18px 14px',
+                maxWidth: '68%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                minHeight: 154,
+              }}
             >
-              <HeroBannerIllustration type={BANNERS[bannerIdx].type} />
-            </div>
-
-            {/* Left Content Area */}
-            <div style={{ maxWidth: '62%', position: 'relative', zIndex: 2 }}>
-              {BANNERS[bannerIdx].type === 'newUser' ? (
-                <>
-                  <div style={{ fontSize: 20, fontWeight: 900, color: '#FF5722', lineHeight: 1.15, letterSpacing: '-0.02em' }}>
-                    {BANNERS[bannerIdx].mainTitle}
-                  </div>
-                  <div style={{ fontSize: 20, fontWeight: 900, color: '#1E293B', lineHeight: 1.15, marginBottom: 8, letterSpacing: '-0.02em' }}>
-                    {BANNERS[bannerIdx].mainTitleSub}
-                  </div>
-
-                  {/* 365% Rate of return badge */}
-                  <div
-                    style={{
-                      display: 'inline-block',
-                      background: 'linear-gradient(90deg, #FFEDD5 0%, #FEE2E2 100%)',
-                      border: '1px solid #FED7AA',
-                      color: '#EA580C',
-                      fontSize: 11,
-                      fontWeight: 800,
-                      padding: '2px 8px',
-                      borderRadius: 4,
-                      marginBottom: 6,
-                    }}
-                  >
-                    {BANNERS[bannerIdx].rateBadge}
-                  </div>
-
-                  {/* 2 Day/Duration badge */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 700, color: '#F59E0B' }}>
-                    <span style={{ fontSize: 13, fontWeight: 900, color: '#D97706' }}>2</span> Day/Duration
-                  </div>
-                </>
-              ) : BANNERS[bannerIdx].type === 'invite' ? (
-                <>
-                  <div style={{ fontSize: 18, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
-                    {BANNERS[bannerIdx].mainTitle}
-                  </div>
-                  <div style={{ fontSize: 18, fontWeight: 900, color: '#FDE047', lineHeight: 1.2, marginBottom: 8 }}>
-                    {BANNERS[bannerIdx].mainTitleSub}
-                  </div>
-
-                  <div
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.15)',
-                      backdropFilter: 'blur(4px)',
-                      borderRadius: 6,
-                      padding: '4px 8px',
-                      fontSize: 10,
-                      lineHeight: 1.3,
-                      marginBottom: 4,
-                      color: 'rgba(255,255,255,0.95)',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                    }}
-                  >
-                    {BANNERS[bannerIdx].rateBadge}
-                  </div>
-                  <div
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.15)',
-                      backdropFilter: 'blur(4px)',
-                      borderRadius: 6,
-                      padding: '4px 8px',
-                      fontSize: 10,
-                      lineHeight: 1.3,
-                      color: 'rgba(255,255,255,0.95)',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                    }}
-                  >
-                    {BANNERS[bannerIdx].durationBadge}
-                  </div>
-                </>
-              ) : (
+              <div>
                 <div
-                  onClick={() => {
-                    if (BANNERS[bannerIdx].type === 'welfare') history.push('/welfare');
-                    else if (BANNERS[bannerIdx].type === 'invite') history.push('/referral');
-                  }}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div style={{ fontSize: 20, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
-                    {BANNERS[bannerIdx].mainTitle}
-                  </div>
-                  <div style={{ fontSize: 20, fontWeight: 900, color: '#C084FC', lineHeight: 1.2, marginBottom: 6 }}>
-                    {BANNERS[bannerIdx].mainTitleSub}
-                  </div>
-                  <div
-                    style={{
-                      display: 'inline-block',
-                      background: 'rgba(244, 63, 94, 0.2)',
-                      border: '1px solid rgba(244, 63, 94, 0.4)',
-                      color: '#FDA4AF',
-                      fontSize: 11,
-                      fontWeight: 800,
-                      padding: '2px 8px',
-                      borderRadius: 4,
-                      marginBottom: 6,
-                    }}
-                  >
-                    {BANNERS[bannerIdx].rateBadge}
-                  </div>
-                  <div style={{ fontSize: 11, opacity: 0.9, color: '#E9D5FF', lineHeight: 1.3 }}>
-                    {BANNERS[bannerIdx].durationBadge}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Pagination Indicators */}
-            <div style={{ display: 'flex', gap: 6, marginTop: 12, position: 'relative', zIndex: 2 }}>
-              {BANNERS.map((_, i) => (
-                <div
-                  key={i}
-                  onClick={() => setBannerIdx(i)}
                   style={{
-                    width: i === bannerIdx ? 18 : 6,
-                    height: 5,
-                    borderRadius: 3,
-                    background:
-                      i === bannerIdx
-                        ? BANNERS[bannerIdx].type === 'newUser'
-                          ? '#2563EB'
-                          : '#FFFFFF'
-                        : BANNERS[bannerIdx].type === 'newUser'
-                        ? '#CBD5E1'
-                        : 'rgba(255,255,255,0.4)',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
+                    fontSize: 11.5,
+                    fontWeight: 700,
+                    color: BANNERS[bannerIdx].accentTag,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                    marginBottom: 2,
                   }}
-                />
-              ))}
+                >
+                  {BANNERS[bannerIdx].mainTitle}
+                </div>
+                <div
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 900,
+                    color: '#FFFFFF',
+                    lineHeight: 1.15,
+                    marginBottom: 8,
+                    letterSpacing: '-0.02em',
+                  }}
+                >
+                  {BANNERS[bannerIdx].mainTitleSub}
+                </div>
+
+                {/* Highlight Tag */}
+                <div
+                  style={{
+                    display: 'inline-block',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    backdropFilter: 'blur(4px)',
+                    color: '#F8FAFC',
+                    fontSize: 10.5,
+                    fontWeight: 800,
+                    padding: '3px 8px',
+                    borderRadius: 5,
+                    marginBottom: 4,
+                  }}
+                >
+                  {BANNERS[bannerIdx].rateBadge}
+                </div>
+
+                {/* Subtitle / Note */}
+                <div style={{ fontSize: 10.5, fontWeight: 600, color: '#94A3B8', marginTop: 2 }}>
+                  {BANNERS[bannerIdx].durationBadge}
+                </div>
+              </div>
+
+              {/* Pagination Indicators */}
+              <div style={{ display: 'flex', gap: 5, marginTop: 12 }}>
+                {BANNERS.map((_, i) => (
+                  <div
+                    key={i}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setBannerIdx(i);
+                    }}
+                    style={{
+                      width: i === bannerIdx ? 18 : 6,
+                      height: 4,
+                      borderRadius: 2,
+                      background: i === bannerIdx ? '#38BDF8' : 'rgba(255,255,255,0.25)',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                    }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
