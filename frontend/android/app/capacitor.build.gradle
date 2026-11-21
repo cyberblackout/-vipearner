@@ -1,0 +1,4 @@
+// Capacitor auto-generated build file
+// Do not modify
+
+apply from: '../node_modules/@capacitor/android/capacitor.build.gradle'

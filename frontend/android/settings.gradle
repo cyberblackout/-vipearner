@@ -1,0 +1,11 @@
+include ':app'
+
+def capacitorProperties = new Properties()
+def capacitorPropertiesFile = rootProject.file('capacitor.properties')
+if (capacitorPropertiesFile.exists()) {
+    capacitorProperties.load(new FileInputStream(capacitorPropertiesFile))
+}
+
+def publishInternal = capacitorProperties.getProperty('publishInternal', 'false')
+
+apply from: '../node_modules/@capacitor/android/capacitor-settings.gradle'

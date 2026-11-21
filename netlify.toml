@@ -1,0 +1,14 @@
+[build]
+  base = "frontend"
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  VITE_SUPABASE_URL = "https://bvxmtlurtaizlewtpsmv.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2eG10bHVydGFpemxld3Rwc212Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwNTk4NTYsImV4cCI6MjEwNDYzNTg1Nn0.mAg20l2Db3wsqqBkMi9gYvYqBeru355X1uCleG3wCDE"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

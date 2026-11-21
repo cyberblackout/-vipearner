@@ -1,59 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# VIP Earner GH
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A mobile-first web application for earning rewards through completing tasks, built with Ionic 8, React 19, Capacitor, and Supabase.
 
-## About Laravel
+## Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Frontend:** Ionic 8 + React 19 + Capacitor 6
+- **Backend:** Supabase (PostgreSQL + Auth + Edge Functions)
+- **Build Tool:** Vite 5 + TypeScript 5
+- **State Management:** Zustand + React Query
+- **Styling:** Ionic CSS variables
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- User authentication (phone + OTP)
+- Daily tasks with rewards
+- VIP tier system (6 levels)
+- Deposits and withdrawals (Paystack integration)
+- Referral system
+- Lucky bag daily rewards
+- Daily check-in streaks
+- Admin dashboard
 
-## Learning Laravel
+## Project Structure
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```
+├── frontend/               # Ionic/React/Capacitor app
+│   ├── src/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── lib/            # Utilities and Supabase client
+│   │   ├── pages/          # Page components (auth, main, financial, engagement, admin)
+│   │   ├── stores/         # Zustand state stores
+│   │   └── theme/          # Ionic theme variables
+│   ├── capacitor.config.ts # Capacitor configuration
+│   └── vite.config.ts      # Vite configuration
+├── backend/                # Supabase Edge Functions + migrations
+│   ├── functions/          # 30 Edge Functions (auth, tasks, payments, admin)
+│   └── migrations/         # Database migrations
+└── README.md
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Prerequisites
 
-## Laravel Sponsors
+- Node.js 18+
+- npm
+- Supabase account
+- Supabase CLI (for deploying Edge Functions)
+- Paystack account (for payments)
+- Termii account (for SMS/OTP)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Setup
 
-### Premium Partners
+### 1. Clone the repository
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+git clone <repository-url>
+cd vipearner-app
+```
 
-## Contributing
+### 2. Set up the frontend
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cd frontend
+npm install
+cp .env.example .env
+```
 
-## Code of Conduct
+Configure `.env` with your Supabase credentials:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
 
-## Security Vulnerabilities
+### 3. Set up the backend
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Create a new Supabase project at https://supabase.com
+2. Link your project:
+   ```bash
+   cd backend
+   supabase link --project-ref your-project-ref
+   ```
+3. Run the migration:
+   ```bash
+   supabase db push
+   ```
+4. Set Edge Function secrets:
+   ```bash
+   supabase secrets set PAYSTACK_SECRET_KEY=sk_test_xxxx
+   supabase secrets set PAYSTACK_WEBHOOK_SECRET=whsec_xxxx
+   supabase secrets set TERMII_API_KEY=your_termii_api_key
+   supabase secrets set TERMII_SENDER_ID=VIPEarner
+   ```
+5. Deploy Edge Functions:
+   ```bash
+   supabase functions deploy
+   ```
+
+## Development
+
+### Frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`
+
+### Backend
+
+```bash
+cd backend
+supabase functions serve
+```
+
+## Building for Production
+
+### Web
+
+```bash
+cd frontend
+npm run build
+```
+
+### Android
+
+```bash
+cd frontend
+npm run cap:build:android
+```
+
+## Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions covering:
+- Netlify / Vercel / static hosting
+- Supabase Edge Functions
+- Paystack webhook configuration
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
