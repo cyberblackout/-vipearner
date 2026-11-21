@@ -82,7 +82,7 @@ export default function BottomNav() {
 
   return (
     <IonFooter
-      className="ion-no-border"
+      className="ion-no-border bottom-nav-footer"
       style={{
         position: 'fixed',
         bottom: 0,
@@ -91,14 +91,18 @@ export default function BottomNav() {
         zIndex: 99999,
         background: '#FFFFFF',
         borderTop: '1px solid #E5E7EB',
-        height: '60px',
+        height: 'calc(60px + env(safe-area-inset-bottom, 0px))',
+        minHeight: '60px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
         boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.05)',
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-        transform: 'translateZ(0)',
-        WebkitTransform: 'translateZ(0)',
+        transform: 'translate3d(0, 0, 0)',
+        WebkitTransform: 'translate3d(0, 0, 0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        boxSizing: 'border-box',
       }}
     >
       <div

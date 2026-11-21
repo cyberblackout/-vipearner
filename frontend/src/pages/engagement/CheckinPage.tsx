@@ -1077,7 +1077,7 @@ export default function CheckinPage() {
         )}
 
         {/* Space for bottom nav */}
-        <div style={{ height: 75 }} />
+        <div style={{ height: 'calc(75px + env(safe-area-inset-bottom, 0px))' }} />
       </IonContent>
       <BottomNav />
     </IonPage>

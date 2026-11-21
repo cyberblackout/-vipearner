@@ -1782,7 +1782,7 @@ export default function ProfilePage() {
         )}
 
         {/* Space for bottom navigation */}
-        <div style={{ height: 75 }} />
+        <div style={{ height: 'calc(75px + env(safe-area-inset-bottom, 0px))' }} />
       </IonContent>
       <BottomNav />
     </IonPage>

@@ -882,7 +882,7 @@ export default function HomePage() {
         )}
 
         {/* Bottom spacer for tab navigation */}
-        <div style={{ height: 60 }} />
+        <div style={{ height: 'calc(75px + env(safe-area-inset-bottom, 0px))' }} />
       </IonContent>
       <BottomNav />
     </IonPage>
