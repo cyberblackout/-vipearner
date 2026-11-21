@@ -667,8 +667,10 @@ export default function ReferralPage() {
           </div>
         )}
 
-        <BottomNav />
+        {/* Space for bottom nav */}
+        <div style={{ height: 75 }} />
       </IonContent>
+      <BottomNav />
     </IonPage>
   );
 }

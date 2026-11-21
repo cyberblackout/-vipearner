@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { IonFooter } from '@ionic/react';
 
 /* 5 exact tabs from reference screenshots:
    1. Home: SVG House icon
@@ -80,13 +81,14 @@ export default function BottomNav() {
   const history = useHistory();
 
   return (
-    <nav
+    <IonFooter
+      className="ion-no-border"
       style={{
         position: 'fixed',
         bottom: 0,
         left: 0,
         right: 0,
-        zIndex: 9999,
+        zIndex: 99999,
         background: '#FFFFFF',
         borderTop: '1px solid #E5E7EB',
         height: '60px',
@@ -95,6 +97,8 @@ export default function BottomNav() {
         justifyContent: 'space-around',
         boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.05)',
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        transform: 'translateZ(0)',
+        WebkitTransform: 'translateZ(0)',
       }}
     >
       <div
@@ -162,6 +166,6 @@ export default function BottomNav() {
           );
         })}
       </div>
-    </nav>
+    </IonFooter>
   );
 }

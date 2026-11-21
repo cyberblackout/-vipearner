@@ -253,8 +253,10 @@ export default function NotificationsPage() {
           )}
         </div>
 
-        <BottomNav />
+        {/* Space for bottom nav */}
+        <div style={{ height: 75 }} />
       </IonContent>
+      <BottomNav />
     </IonPage>
   );
 }
