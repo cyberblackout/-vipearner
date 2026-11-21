@@ -110,7 +110,7 @@ const FAQ_DATA: FaqItem[] = [
     id: 'with-3',
     category: 'withdraw',
     q: 'What is the withdrawal fee and minimum withdrawal limit?',
-    a: 'The minimum withdrawal is GH₵ 20.00, and standard daily maximum is GH₵ 5,000.00. A standard 5% telecom payment switch fee is deducted to cover automated carrier transaction charges and liquidity rail costs.',
+    a: 'The minimum withdrawal is GH₵ 50.00, and standard daily maximum is GH₵ 5,000.00. A standard 5% telecom payment switch fee is deducted to cover automated carrier transaction charges and liquidity rail costs.',
   },
   {
     id: 'with-4',
@@ -521,6 +521,9 @@ export default function FaqPage() {
               <span>Contact Us</span>
             </button>
           </div>
+
+          {/* Mobile bottom clearance spacer for fixed BottomNav */}
+          <div style={{ height: 'calc(75px + env(safe-area-inset-bottom, 0px))', width: '100%', flexShrink: 0 }} />
         </div>
       </IonContent>
       <BottomNav />

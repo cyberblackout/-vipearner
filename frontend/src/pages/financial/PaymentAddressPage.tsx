@@ -803,6 +803,9 @@ export default function PaymentAddressPage() {
             </div>
           </div>
         )}
+
+        {/* Mobile bottom clearance spacer for fixed BottomNav */}
+        <div style={{ height: 'calc(75px + env(safe-area-inset-bottom, 0px))', width: '100%', flexShrink: 0 }} />
       </IonContent>
       <BottomNav />
     </IonPage>

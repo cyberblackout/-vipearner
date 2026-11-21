@@ -293,6 +293,9 @@ export default function AnnouncementPage() {
             <IonIcon icon={shieldCheckmarkOutline} style={{ fontSize: 14, color: '#2563EB' }} />
             <span>Official Announcements • VipEarner Administration Desk</span>
           </div>
+
+          {/* Mobile bottom clearance spacer for fixed BottomNav */}
+          <div style={{ height: 'calc(75px + env(safe-area-inset-bottom, 0px))', width: '100%', flexShrink: 0 }} />
         </div>
       </IonContent>
       <BottomNav />

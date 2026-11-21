@@ -1567,6 +1567,9 @@ export default function WithdrawPage() {
             </div>
           </div>
         )}
+
+        {/* Mobile bottom safe-area clearance */}
+        <div style={{ height: 'calc(32px + env(safe-area-inset-bottom, 0px))', width: '100%', flexShrink: 0 }} />
       </IonContent>
     </IonPage>
   );

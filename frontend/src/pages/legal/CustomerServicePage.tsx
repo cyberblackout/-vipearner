@@ -526,8 +526,8 @@ export default function CustomerServicePage() {
           </div>
         )}
 
-        {/* Space for bottom nav */}
-        <div style={{ height: 75 }} />
+        {/* Mobile bottom clearance spacer for fixed BottomNav */}
+        <div style={{ height: 'calc(75px + env(safe-area-inset-bottom, 0px))', width: '100%', flexShrink: 0 }} />
       </IonContent>
       <BottomNav />
     </IonPage>
