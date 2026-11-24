@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonIcon,
   IonSpinner,
 } from '@ionic/react';
@@ -19,6 +18,7 @@ import { useAuthStore } from '../../stores/auth';
 import { callEdgeFunction } from '../../lib/supabase';
 import { formatGHS, formatDate } from '../../lib/formatters';
 import BottomNav from '../../components/BottomNav';
+import AppBackButton from '../../components/AppBackButton';
 
 interface ReferralStats {
   referral_code: string;
@@ -92,7 +92,7 @@ export default function ReferralPage() {
       <IonHeader className="ion-no-border">
         <IonToolbar style={{ '--background': '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" color="dark" />
+            <AppBackButton fallback="/home" />
           </IonButtons>
           <IonTitle style={{ fontSize: 17, fontWeight: 700, color: '#0F172A', textAlign: 'center' }}>
             Share and earn coins

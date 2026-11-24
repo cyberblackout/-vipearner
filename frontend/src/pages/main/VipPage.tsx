@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonPage,
@@ -16,6 +16,7 @@ import { InvestmentProductCard } from '../../components/common/InvestmentProduct
 import { VipIncomeTable } from '../../components/common/VipIncomeTable';
 import { TrustFooter } from '../../components/common/TrustFooter';
 import { PRODUCTS_CATALOG, CryptoStakingProduct, COIN_CHIPS } from '../../data/cryptoProducts';
+import { useNavigationStore } from '../../stores/navigationStore';
 
 export default function VipPage() {
   const history = useHistory();
@@ -28,6 +29,19 @@ export default function VipPage() {
   const [pledgeAmount, setPledgeAmount] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
+
+  // Android back button: close modals if open
+  useEffect(() => {
+    if (showConfirmModal) {
+      return useNavigationStore.getState().registerModal('vipConfirm', () => setShowConfirmModal(false));
+    }
+  }, [showConfirmModal]);
+
+  useEffect(() => {
+    if (detailProduct && !showConfirmModal) {
+      return useNavigationStore.getState().registerModal('vipDetail', () => setDetailProduct(null));
+    }
+  }, [detailProduct, showConfirmModal]);
 
   const handleConfirmVipOrder = async () => {
     if (!detailProduct) return;

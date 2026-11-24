@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonIcon,
 } from '@ionic/react';
 import {
@@ -23,6 +22,7 @@ import {
 } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import BottomNav from '../../components/BottomNav';
+import AppBackButton from '../../components/AppBackButton';
 
 interface FaqItem {
   id: string;
@@ -185,7 +185,7 @@ export default function FaqPage() {
       <IonHeader className="ion-no-border">
         <IonToolbar style={{ '--background': '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" color="dark" />
+            <AppBackButton fallback="/profile" />
           </IonButtons>
           <IonTitle style={{ fontSize: 17, fontWeight: 800, color: '#0F172A', textAlign: 'center' }}>
             Help &amp; FAQ

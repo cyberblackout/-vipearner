@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonIcon,
 } from '@ionic/react';
 import {
@@ -27,6 +26,8 @@ import {
 import { useAuthStore } from '../../stores/auth';
 import { supabase } from '../../lib/supabase';
 import BottomNav from '../../components/BottomNav';
+import { useNavigationStore } from '../../stores/navigationStore';
+import AppBackButton from '../../components/AppBackButton';
 
 export default function AccountSecurityPage() {
   const { profile, user } = useAuthStore();
@@ -64,6 +65,19 @@ export default function AccountSecurityPage() {
   const [pinLoading, setPinLoading] = useState(false);
   const [pinError, setPinError] = useState('');
   const [pinSuccess, setPinSuccess] = useState(false);
+
+  // Android back button: close modals if open
+  useEffect(() => {
+    if (showPasswordModal) {
+      return useNavigationStore.getState().registerModal('changePassword', () => setShowPasswordModal(false));
+    }
+  }, [showPasswordModal]);
+
+  useEffect(() => {
+    if (showPinModal) {
+      return useNavigationStore.getState().registerModal('changePin', () => setShowPinModal(false));
+    }
+  }, [showPinModal]);
 
   // Password submission
   const handleUpdatePassword = async (e: React.FormEvent) => {
@@ -159,7 +173,7 @@ export default function AccountSecurityPage() {
       <IonHeader className="ion-no-border">
         <IonToolbar style={{ '--background': '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/profile" color="dark" />
+            <AppBackButton fallback="/profile" />
           </IonButtons>
           <IonTitle style={{ fontSize: 17, fontWeight: 800, color: '#0F172A', textAlign: 'center' }}>
             Account Security

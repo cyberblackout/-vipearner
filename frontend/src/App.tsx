@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useAuthStore } from './stores/auth';
 import { supabase } from './lib/supabase';
 import { AppRouter } from './router';
+import NavigationController from './components/NavigationController';
 
 setupIonicReact();
 
@@ -68,6 +69,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <IonApp>
         <IonReactRouter>
+          <NavigationController />
           <IonRouterOutlet>
             <AppRouter />
           </IonRouterOutlet>

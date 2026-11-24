@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { callEdgeFunction } from '../../lib/supabase';
 import { formatGHS as _formatGHS } from '../../lib/formatters';
+import AppBackButton from '../../components/AppBackButton';
 
 export default function LuckyBagPage() {
   const queryClient = useQueryClient();
@@ -40,13 +41,16 @@ export default function LuckyBagPage() {
 
   return (
     <IonPage>
-      <div className="gradient-header">
-        <h1 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'white' }}>
-          Lucky Bag
-        </h1>
-        <p style={{ opacity: 0.7, fontSize: 14, margin: '4px 0 0', color: 'white' }}>
-          Win rewards daily
-        </p>
+      <div className="gradient-header" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <AppBackButton fallback="/welfare" color="#FFFFFF" />
+        <div>
+          <h1 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'white' }}>
+            Lucky Bag
+          </h1>
+          <p style={{ opacity: 0.7, fontSize: 14, margin: '4px 0 0', color: 'white' }}>
+            Win rewards daily
+          </p>
+        </div>
       </div>
 
       <IonContent>

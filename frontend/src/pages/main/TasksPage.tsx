@@ -12,6 +12,7 @@ import { callEdgeFunction } from '../../lib/supabase';
 import { formatGHS } from '../../lib/formatters';
 import { useAuthStore } from '../../stores/auth';
 import { RefresherEventDetail } from '@ionic/core';
+import AppBackButton from '../../components/AppBackButton';
 
 export default function TasksPage() {
   const queryClient = useQueryClient();
@@ -68,13 +69,16 @@ export default function TasksPage() {
 
   return (
     <IonPage>
-      <div className="gradient-header">
-        <h1 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'white' }}>
-          Daily Tasks
-        </h1>
-        <p style={{ opacity: 0.7, fontSize: 14, margin: '4px 0 0', color: 'white' }}>
-          Complete tasks to earn rewards
-        </p>
+      <div className="gradient-header" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <AppBackButton fallback="/home" color="#FFFFFF" />
+        <div>
+          <h1 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'white' }}>
+            Daily Tasks
+          </h1>
+          <p style={{ opacity: 0.7, fontSize: 14, margin: '4px 0 0', color: 'white' }}>
+            Complete tasks to earn rewards
+          </p>
+        </div>
       </div>
 
       <IonContent>

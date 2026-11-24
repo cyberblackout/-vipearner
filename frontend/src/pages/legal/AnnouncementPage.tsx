@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonIcon,
   IonSpinner,
 } from '@ionic/react';
@@ -18,6 +17,7 @@ import {
 } from 'ionicons/icons';
 import { supabase } from '../../lib/supabase';
 import BottomNav from '../../components/BottomNav';
+import AppBackButton from '../../components/AppBackButton';
 
 interface Announcement {
   id: string;
@@ -70,7 +70,7 @@ export default function AnnouncementPage() {
       <IonHeader className="ion-no-border">
         <IonToolbar style={{ '--background': '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/profile" color="dark" />
+            <AppBackButton fallback="/profile" />
           </IonButtons>
           <IonTitle style={{ fontSize: 17, fontWeight: 800, color: '#0F172A', textAlign: 'center' }}>
             Announcements

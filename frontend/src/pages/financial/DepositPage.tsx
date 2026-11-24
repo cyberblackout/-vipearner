@@ -16,8 +16,9 @@ import {
   timeOutline,
   refreshOutline,
 } from 'ionicons/icons';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../stores/auth';
+import { useAppNavigation } from '../../services/navigation';
 import { formatGHS } from '../../lib/formatters';
 import { callEdgeFunction, supabase } from '../../lib/supabase';
 import CryptoCoinIcon from '../../components/common/CryptoCoinIcon';
@@ -50,9 +51,9 @@ const TELECEL_ACCOUNT = {
 const QUICK_AMOUNTS = [250, 500, 1000, 2000, 3500, 5000];
 
 export default function DepositPage() {
-  const history = useHistory();
   const location = useLocation();
   const { profile } = useAuthStore();
+  const { goBack } = useAppNavigation();
 
   const queryParams = new URLSearchParams(location.search);
   const planCoin = queryParams.get('coin');
@@ -307,7 +308,7 @@ export default function DepositPage() {
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <button
-              onClick={() => history.push('/home')}
+              onClick={() => goBack('/home')}
               style={{
                 background: 'none',
                 border: 'none',

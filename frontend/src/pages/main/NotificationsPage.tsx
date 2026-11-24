@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonIcon,
   IonSpinner,
   IonRefresher,
@@ -23,6 +22,7 @@ import {
 import { callEdgeFunction } from '../../lib/supabase';
 import { formatDate, formatTime } from '../../lib/formatters';
 import BottomNav from '../../components/BottomNav';
+import AppBackButton from '../../components/AppBackButton';
 import { RefresherEventDetail } from '@ionic/core';
 
 interface NotificationItem {
@@ -127,7 +127,7 @@ export default function NotificationsPage() {
       <IonHeader className="ion-no-border">
         <IonToolbar style={{ '--background': '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" color="dark" />
+            <AppBackButton fallback="/home" />
           </IonButtons>
           <IonTitle style={{ fontSize: 17, fontWeight: 800, color: '#0F172A', textAlign: 'center' }}>
             Notifications

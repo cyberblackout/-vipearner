@@ -5,7 +5,6 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonIcon,
 } from '@ionic/react';
 import {
@@ -15,6 +14,7 @@ import {
   checkmarkCircleOutline,
 } from 'ionicons/icons';
 import BottomNav from '../../components/BottomNav';
+import AppBackButton from '../../components/AppBackButton';
 
 export default function LicensePage() {
   return (
@@ -22,7 +22,7 @@ export default function LicensePage() {
       <IonHeader className="ion-no-border">
         <IonToolbar style={{ '--background': '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" color="dark" />
+            <AppBackButton fallback="/profile" />
           </IonButtons>
           <IonTitle style={{ fontSize: 17, fontWeight: 700, color: '#0F172A', textAlign: 'center' }}>
             License

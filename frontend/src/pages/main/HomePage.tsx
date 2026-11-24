@@ -20,6 +20,7 @@ import LanguageFlag from '../../components/common/LanguageFlag';
 import { InvestmentProductCard } from '../../components/common/InvestmentProductCard';
 import { VipIncomeTable } from '../../components/common/VipIncomeTable';
 import { PRODUCTS_CATALOG, CryptoStakingProduct, COIN_CHIPS as COIN_TABS } from '../../data/cryptoProducts';
+import { useNavigationStore } from '../../stores/navigationStore';
 
 /* ── 1. CAROUSEL BANNERS (FEATURING USER CRYPTO ASSETS) ───────────── */
 const BANNERS = [
@@ -84,6 +85,13 @@ export default function HomePage() {
   const [pledgeModal, setPledgeModal] = useState<CryptoProduct | null>(null);
   const [pledgeAmount, setPledgeAmount] = useState('');
   const [pledgeSuccess, setPledgeSuccess] = useState(false);
+
+  // Android back button: close pledge modal if open
+  useEffect(() => {
+    if (pledgeModal) {
+      return useNavigationStore.getState().registerModal('pledgeModal', () => setPledgeModal(null));
+    }
+  }, [pledgeModal]);
 
   const handleActivatePlan = async () => {
     if (!pledgeModal) return;

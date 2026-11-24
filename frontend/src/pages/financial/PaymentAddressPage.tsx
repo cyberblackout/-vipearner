@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonIcon,
 } from '@ionic/react';
 import {
@@ -22,6 +21,8 @@ import {
   phonePortraitOutline,
 } from 'ionicons/icons';
 import { useAuthStore } from '../../stores/auth';
+import { useNavigationStore } from '../../stores/navigationStore';
+import AppBackButton from '../../components/AppBackButton';
 import {
   SavedPaymentAddress,
   getSavedAddresses,
@@ -75,6 +76,13 @@ export default function PaymentAddressPage() {
   useEffect(() => {
     loadAddresses();
   }, [userId]);
+
+  // Android back button: close add address modal if open
+  useEffect(() => {
+    if (showAddModal) {
+      return useNavigationStore.getState().registerModal('addPaymentAddress', () => setShowAddModal(false));
+    }
+  }, [showAddModal]);
 
   const loadAddresses = async () => {
     let list = await syncSavedAddressesWithSupabase(userId);
@@ -174,7 +182,7 @@ export default function PaymentAddressPage() {
       <IonHeader className="ion-no-border">
         <IonToolbar style={{ '--background': '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/profile" color="dark" />
+            <AppBackButton fallback="/profile" />
           </IonButtons>
           <IonTitle style={{ fontSize: 17, fontWeight: 800, color: '#0F172A', textAlign: 'center' }}>
             Payment Address

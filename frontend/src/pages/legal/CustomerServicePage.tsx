@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonIcon,
 } from '@ionic/react';
 import {
@@ -19,6 +18,8 @@ import {
   shieldCheckmarkOutline,
 } from 'ionicons/icons';
 import BottomNav from '../../components/BottomNav';
+import { useNavigationStore } from '../../stores/navigationStore';
+import AppBackButton from '../../components/AppBackButton';
 
 interface LiveMsg {
   id: string;
@@ -48,6 +49,13 @@ export default function CustomerServicePage() {
       chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [liveMessages, isAgentTyping, showLiveChat]);
+
+  // Android back button: close live chat modal if open
+  useEffect(() => {
+    if (showLiveChat) {
+      return useNavigationStore.getState().registerModal('liveChat', () => setShowLiveChat(false));
+    }
+  }, [showLiveChat]);
 
   const handleOpenWhatsApp = () => {
     window.open('https://wa.me/233544269465?text=Hello%20VIP%20Earner%20Support,%20I%20need%20assistance.', '_blank');
@@ -105,7 +113,7 @@ export default function CustomerServicePage() {
       <IonHeader className="ion-no-border">
         <IonToolbar style={{ '--background': '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" color="dark" />
+            <AppBackButton fallback="/home" />
           </IonButtons>
           <IonTitle style={{ fontSize: 17, fontWeight: 700, color: '#0F172A', textAlign: 'center' }}>
             Online consultation

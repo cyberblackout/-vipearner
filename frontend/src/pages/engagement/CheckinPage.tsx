@@ -17,6 +17,7 @@ import { useAuthStore } from '../../stores/auth';
 import { formatGHS } from '../../lib/formatters';
 import BottomNav from '../../components/BottomNav';
 import { WelfareTrustFooter } from '../../components/common/WelfareTrustFooter';
+import { useNavigationStore } from '../../stores/navigationStore';
 
 /* ── AUDIO SYNTHESIZER FOR CRISP SPINNING TICKS & WIN CHIME ── */
 const playAudioTick = (pitch = 750) => {
@@ -124,6 +125,25 @@ export default function CheckinPage() {
       localStorage.setItem(`vipearner_used_coupons_${profile.id}`, String(usedCoupons));
     }
   }, [totalCoupons, usedCoupons, profile?.id]);
+
+  // Android back button: close modals or return to main view
+  useEffect(() => {
+    if (prizeModal) {
+      return useNavigationStore.getState().registerModal('checkinPrize', () => setPrizeModal(null));
+    }
+  }, [prizeModal]);
+
+  useEffect(() => {
+    if (cooldownModal) {
+      return useNavigationStore.getState().registerModal('checkinCooldown', () => setCooldownModal(null));
+    }
+  }, [cooldownModal]);
+
+  useEffect(() => {
+    if (currentView === 'details') {
+      return useNavigationStore.getState().registerModal('checkinDetails', () => setCurrentView('main'));
+    }
+  }, [currentView]);
 
   // Check-in status query
   const { data: checkinData } = useQuery({

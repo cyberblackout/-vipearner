@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonIcon,
 } from '@ionic/react';
 import {
@@ -28,6 +27,8 @@ import {
   trendingUpOutline,
 } from 'ionicons/icons';
 import { useAuthStore } from '../../stores/auth';
+import { useNavigationStore } from '../../stores/navigationStore';
+import AppBackButton from '../../components/AppBackButton';
 import { formatGHS } from '../../lib/formatters';
 import { callEdgeFunction, supabase } from '../../lib/supabase';
 import BottomNav from '../../components/BottomNav';
@@ -66,6 +67,13 @@ export default function FundsDetailsPage() {
   useEffect(() => {
     fetchFundRecords();
   }, [profile?.id]);
+
+  // Android back button: close audit slip modal if open
+  useEffect(() => {
+    if (selectedTx) {
+      return useNavigationStore.getState().registerModal('auditSlip', () => setSelectedTx(null));
+    }
+  }, [selectedTx]);
 
   const fetchFundRecords = async () => {
     setLoading(true);
@@ -414,7 +422,7 @@ export default function FundsDetailsPage() {
       <IonHeader className="ion-no-border">
         <IonToolbar style={{ '--background': '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/profile" color="dark" />
+            <AppBackButton fallback="/profile" />
           </IonButtons>
           <IonTitle style={{ fontSize: 17, fontWeight: 800, color: '#0F172A', textAlign: 'center' }}>
             Funds Details

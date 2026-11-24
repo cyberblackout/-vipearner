@@ -1,0 +1,20 @@
+{
+	"appId": "com.vipearner.gh",
+	"appName": "VIP Earner GH",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https"
+	},
+	"plugins": {
+		"App": {},
+		"StatusBar": {
+			"style": "DARK",
+			"backgroundColor": "#1D4ED8"
+		},
+		"Keyboard": {
+			"resize": "body",
+			"style": "DARK"
+		}
+	},
+	"android": {}
+}

@@ -21,6 +21,7 @@ import {
 } from 'ionicons/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../stores/auth';
+import { useAppNavigation } from '../../services/navigation';
 import { callEdgeFunction, supabase } from '../../lib/supabase';
 import { RecentWithdrawalsSection } from '../../components/common/RecentWithdrawalsSection';
 import CryptoCoinIcon from '../../components/common/CryptoCoinIcon';
@@ -136,6 +137,7 @@ export default function WithdrawPage() {
   const history = useHistory();
   const location = useLocation();
   const { profile, setProfile } = useAuthStore();
+  const { goBack } = useAppNavigation();
 
   const queryParams = new URLSearchParams(location.search);
   const targetAmount = queryParams.get('amount');
@@ -369,7 +371,7 @@ export default function WithdrawPage() {
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <button
-              onClick={() => history.push('/home')}
+              onClick={() => goBack('/transactions')}
               style={{
                 background: 'none',
                 border: 'none',

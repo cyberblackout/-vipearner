@@ -24,6 +24,7 @@ import { useAuthStore } from '../../stores/auth';
 import { supabase } from '../../lib/supabase';
 import { formatGHS, formatDate, formatTime } from '../../lib/formatters';
 import BottomNav from '../../components/BottomNav';
+import { useNavigationStore } from '../../stores/navigationStore';
 import { RefresherEventDetail } from '@ionic/core';
 
 interface TransactionItem {
@@ -43,7 +44,13 @@ export default function TransactionsPage() {
   const [balanceVisible, setBalanceVisible] = useState(true);
   const [transactions, setTransactions] = useState<TransactionItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filterType, setFilterType] = useState<'all' | 'deposit' | 'withdrawal' | 'rewards'>('all');
+  const savedFilter = useNavigationStore.getState().getPageState('transactions')?.filterType;
+  const [filterType, setFilterType] = useState<'all' | 'deposit' | 'withdrawal' | 'rewards'>(savedFilter || 'all');
+
+  const handleFilterChange = (type: 'all' | 'deposit' | 'withdrawal' | 'rewards') => {
+    setFilterType(type);
+    useNavigationStore.getState().setPageState('transactions', { filterType: type });
+  };
 
   const fetchTransactions = async () => {
     try {
@@ -339,7 +346,7 @@ export default function TransactionsPage() {
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setFilterType(tab.id as any)}
+                    onClick={() => handleFilterChange(tab.id as any)}
                     style={{
                       background: active ? '#2563EB' : '#FFFFFF',
                       color: active ? '#FFFFFF' : '#64748B',
