@@ -350,7 +350,7 @@ export default function VipPage() {
                   {/* Amount Input with ALL button */}
                   <div style={{ marginBottom: 16 }}>
                     <label style={{ fontSize: 13, fontWeight: 700, color: '#334155', display: 'block', marginBottom: 6 }}>
-                      Pledge Amount ({detailProduct.coin})
+                      Investment Amount ({detailProduct.coin})
                     </label>
                     <div
                       style={{

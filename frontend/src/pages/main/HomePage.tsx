@@ -777,7 +777,7 @@ export default function HomePage() {
                   {/* Amount Input */}
                   <div style={{ marginBottom: 16 }}>
                     <label style={{ fontSize: 13, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>
-                      Pledge Amount ({pledgeModal.coin})
+                      Investment Amount ({pledgeModal.coin})
                     </label>
                     <div
                       style={{
