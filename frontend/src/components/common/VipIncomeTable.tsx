@@ -167,15 +167,15 @@ export const VipIncomeTable: React.FC<VipIncomeTableProps> = ({
           <span style={{ color: '#FFFFFF', fontWeight: 600 }}>{formatGHC(daily)}</span>
         </div>
 
-        {/* Row 3: Weekly Income (7 days) */}
+        {/* Row 3: Weekly Income */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ color: '#F3F4F6' }}>Weekly Income (7 days)</span>
+          <span style={{ color: '#F3F4F6' }}>Weekly Income</span>
           <span style={{ color: '#FFFFFF', fontWeight: 600 }}>{formatGHC(weeklyIncome)}</span>
         </div>
 
-        {/* Row 4: Monthly Income (30 days) */}
+        {/* Row 4: Monthly Income */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ color: '#F3F4F6' }}>Monthly Income (30 days)</span>
+          <span style={{ color: '#F3F4F6' }}>Monthly Income</span>
           <span style={{ color: '#FFFFFF', fontWeight: 600 }}>{formatGHC(monthlyIncome)}</span>
         </div>
 
@@ -185,17 +185,18 @@ export const VipIncomeTable: React.FC<VipIncomeTableProps> = ({
           <span style={{ color: '#FFFFFF', fontWeight: 600 }}>{duration} days</span>
         </div>
 
-        {/* Row 6: Total Income ({duration} days) - Bold */}
+        {/* Row 6: Total Income - Bold */}
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            paddingTop: 4,
+            paddingTop: 6,
+            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
           }}
         >
           <span style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 15 }}>
-            Total Income ({duration} days)
+            Total Income
           </span>
           <span style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 15 }}>
             {formatGHC(totalIncome)}
